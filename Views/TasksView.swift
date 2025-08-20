@@ -8,109 +8,110 @@
 import SwiftUI
 
 struct TasksView: View {
-    @AppStorage("hasShownSuggestionHint") var hasShownHint = false
-    @AppStorage("isPremiumUser") var isPremiumUser: Bool = false
-    @State var showHint = false
-    @EnvironmentObject var RealmManager: RealmManager
+    @AppStorage("hasShownSuggestionHint") private var hasShownHint = false
+    @AppStorage("isPremiumUser") private var isPremiumUser = false
+
+    @EnvironmentObject var realmManager: RealmManager
     @EnvironmentObject var suggestionManager: SuggestionManager
-    @State var suggestionToDelete: SuggestedItem?
-    @State var showingDeleteConfirmation = false
-    let freeTaskLimit = 0
-    @State var showPaywall = false
+    @Environment(\.colorScheme) private var colorScheme
 
+    @State private var showHint = false
+    @State private var suggestionToDelete: SuggestedItem?
+    @State private var showingDeleteConfirmation = false
 
-    
+    // Use your original light color, switch only in dark mode
+    private var pageBackground: Color {
+        if colorScheme == .dark {
+            return Color(.systemGroupedBackground)   // or Color.black.opacity(0.95) if you want darker
+        } else {
+            return Color(hue: 0.086, saturation: 0.141, brightness: 0.972) // your old light bg
+        }
+    }
+
     var body: some View {
         ZStack {
-            Color(hue: 0.086, saturation: 0.141, brightness: 0.972)
-                .ignoresSafeArea()
-            VStack {
+            pageBackground.ignoresSafeArea()
+
+            VStack(spacing: 12) {
                 HeaderView()
-                
+
                 if isPremiumUser && !suggestionManager.suggestions.isEmpty {
                     Text("Suggested Items")
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
 
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            let suggestions = suggestionManager.suggestions
-                            
-                            
-                            ForEach(suggestions, id: \.id) { item in
-                                suggestionView(for: item)
+                        HStack(spacing: 8) {
+                            ForEach(suggestionManager.suggestions, id: \.id) { item in
+                                suggestionChip(for: item)
                             }
                         }
-                        .padding(.vertical, 1)
                         .padding(.horizontal)
-                        .padding(.bottom, 1)
+                        .padding(.vertical, 4)
                     }
                     .onAppear {
-                        if !hasShownHint && !suggestionManager.suggestions.isEmpty {
-                            showHint.toggle()
-                            hasShownHint.toggle()
+                        if !hasShownHint {
+                            showHint = true
+                            hasShownHint = true
                         }
                     }
                     .alert("Tip", isPresented: $showHint) {
                         Button("Got it", role: .cancel) { }
                     } message: {
-                        Text("Long-press a suggestion item to remove it from this list.")
+                        Text("Long-press a suggestion to remove it from this list.")
                     }
-
                 }
-                    
-                if RealmManager.tasks.isEmpty {
-                       Text("Your list is empty")
+
+                if realmManager.tasks.isEmpty {
+                    Text("Your list is empty")
+                        .foregroundStyle(.secondary)
                         .padding(.vertical, 20)
-                   }
-
-                
-                TaskListSection(suggestionManager: suggestionManager)
-//                .onAppear() {
-//                    UITableView.appearance().backgroundColor = UIColor.clear
-//                    UITableViewCell.appearance().backgroundColor = UIColor.clear
-//                }
-            }
-            .confirmationDialog("Delete this suggestion?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
-                Button("Delete", role: .destructive) {
-                    if let item = suggestionToDelete {
-                        suggestionManager.deleteSuggestion(id: item.id)
-                        suggestionToDelete = nil
-                    }
                 }
-                Button("Cancel", role: .cancel) {
+
+                TaskListSection(suggestionManager: suggestionManager)
+                    .scrollContentBackground(.hidden) // lets our bg show through if it's a List
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        }
+        .confirmationDialog("Delete this suggestion?",
+                            isPresented: $showingDeleteConfirmation,
+                            titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                if let item = suggestionToDelete {
+                    suggestionManager.deleteSuggestion(id: item.id)
                     suggestionToDelete = nil
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(hue: 0.086, saturation: 0.141, brightness: 0.972))
+            Button("Cancel", role: .cancel) { suggestionToDelete = nil }
         }
     }
-    
-    
-    
-    
-    
-    @ViewBuilder
-    func suggestionView(for item: SuggestedItem) -> some View {
+
+    // keeps chips dynamic (light: subtle gray; dark: dark surface)
+    private func suggestionChip(for item: SuggestedItem) -> some View {
         Text(item.title)
+            .font(.callout)
             .padding(.vertical, 6)
             .padding(.horizontal, 12)
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 1)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color(.secondarySystemBackground))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .stroke(Color(.separator), lineWidth: 0.5)
+            )
             .onTapGesture {
-                RealmManager.addTask(taskTitle: item.title, quantity: 1, suggestionManager: suggestionManager)
+                realmManager.addTask(taskTitle: item.title, quantity: 1, suggestionManager: suggestionManager)
             }
             .onLongPressGesture {
                 suggestionToDelete = item
                 showingDeleteConfirmation = true
             }
     }
-
 }
+
 struct TasksView_Previews: PreviewProvider {
     static var previews: some View {
         TasksView()

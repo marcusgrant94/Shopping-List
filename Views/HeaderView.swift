@@ -7,51 +7,52 @@
 
 import SwiftUI
 
-
 struct HeaderView: View {
-    @EnvironmentObject var RealmManager: RealmManager
-    @State var showPaywall: Bool = false
-    @AppStorage("isPremiumUser") var isPremiumUser: Bool = false
-
+    @EnvironmentObject var realmManager: RealmManager
+    @State private var showPaywall = false
+    @AppStorage("isPremiumUser") var isPremiumUser = false
 
     var body: some View {
         HStack {
             Text("My List")
-                .font(.title3).bold()
-                .foregroundColor(.black)
+                .font(.title3.bold())
+                .foregroundStyle(.primary) // auto black/white
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             if isPremiumUser {
                 PremiumButton()
                     .padding(.top)
                     .padding(.horizontal)
+                    .tint(.primary) // adapts in dark mode
             } else {
-                Button {
-                    showPaywall.toggle()
-                } label: {
+                Button { showPaywall = true } label: {
                     PremiumButton()
                         .padding(.top)
                         .padding(.horizontal)
                 }
+                .tint(.primary)
                 .sheet(isPresented: $showPaywall) {
                     PaywallView()
                 }
             }
-            
-            
+
+            // Ensure ShareButton respects tint (if it uses SF Symbols)
             ShareButton()
                 .padding(.top)
-            
+                .tint(.primary)
+
             Button {
-                RealmManager.deleteAllTasks()
+                realmManager.deleteAllTasks()
             } label: {
-                Label("", systemImage: "trash")
-                    .foregroundColor(.red)
+                Image(systemName: "trash")
+                    .imageScale(.medium)
             }
+            .tint(.red) // red works in both modes
             .padding(.horizontal)
             .padding(.top)
         }
     }
 }
+
 

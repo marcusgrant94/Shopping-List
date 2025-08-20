@@ -1,5 +1,15 @@
 {
+  "originHash" : "7b13b32ed2ba7156bc37b07f186e124297f9e6b5eeb0e3d2acd66a053fabbe32",
   "pins" : [
+    {
+      "identity" : "couchbase-lite-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/couchbase/couchbase-lite-ios",
+      "state" : {
+        "revision" : "4a466d2513922dd6c8a0da723f2a7d92ac0dcafc",
+        "version" : "3.2.4"
+      }
+    },
     {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
@@ -19,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

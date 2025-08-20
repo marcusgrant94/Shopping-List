@@ -23,6 +23,8 @@
 		C88F0EE827EDADFA00A72436 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C88F0EE727EDADFA00A72436 /* RealmSwift */; };
 		C88F0EEA27EDAE3200A72436 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F0EE927EDAE3200A72436 /* RealmManager.swift */; };
 		C88F0EEC27EDAE8500A72436 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F0EEB27EDAE8500A72436 /* Task.swift */; };
+		C88F2F782E4EB501000BF522 /* CouchbaseLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C88F2F772E4EB501000BF522 /* CouchbaseLiteSwift */; };
+		C88F30EF2E558B23000BF522 /* AppReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F30EE2E558B1F000BF522 /* AppReviewManager.swift */; };
 		C8B6496B2DDD7132000051AC /* SuggestionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B6496A2DDD7122000051AC /* SuggestionsManager.swift */; };
 		C8B6496D2DDFEF0D000051AC /* RecipeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B6496C2DDFEF0B000051AC /* RecipeResponse.swift */; };
 		C8B649712DE1556E000051AC /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B649702DE15560000051AC /* HeaderView.swift */; };
@@ -68,6 +70,7 @@
 		C88F0EE227EDAD4F00A72436 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		C88F0EE927EDAE3200A72436 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		C88F0EEB27EDAE8500A72436 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C88F30EE2E558B1F000BF522 /* AppReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewManager.swift; sourceTree = "<group>"; };
 		C8B6496A2DDD7122000051AC /* SuggestionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsManager.swift; sourceTree = "<group>"; };
 		C8B6496C2DDFEF0B000051AC /* RecipeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponse.swift; sourceTree = "<group>"; };
 		C8B649702DE15560000051AC /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C88F2F782E4EB501000BF522 /* CouchbaseLiteSwift in Frameworks */,
 				C88F0EE827EDADFA00A72436 /* RealmSwift in Frameworks */,
 				C88F0EE627EDADFA00A72436 /* Realm in Frameworks */,
 			);
@@ -108,6 +112,7 @@
 		C88F0EA427EDABBE00A72436 = {
 			isa = PBXGroup;
 			children = (
+				C88F30EE2E558B1F000BF522 /* AppReviewManager.swift */,
 				C8B6496C2DDFEF0B000051AC /* RecipeResponse.swift */,
 				C8B6497A2DE17805000051AC /* StoreManager.swift */,
 				C88F0EE927EDAE3200A72436 /* RealmManager.swift */,
@@ -211,6 +216,7 @@
 			packageProductDependencies = (
 				C88F0EE527EDADFA00A72436 /* Realm */,
 				C88F0EE727EDADFA00A72436 /* RealmSwift */,
+				C88F2F772E4EB501000BF522 /* CouchbaseLiteSwift */,
 			);
 			productName = "Shopping List";
 			productReference = C88F0EAD27EDABBE00A72436 /* Shopping List.app */;
@@ -286,6 +292,7 @@
 			mainGroup = C88F0EA427EDABBE00A72436;
 			packageReferences = (
 				C88F0EE427EDADFA00A72436 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				C88F2F762E4EB501000BF522 /* XCRemoteSwiftPackageReference "couchbase-lite-ios" */,
 			);
 			productRefGroup = C88F0EAE27EDABBE00A72436 /* Products */;
 			projectDirPath = "";
@@ -340,6 +347,7 @@
 				C88F0EE327EDAD4F00A72436 /* TaskRow.swift in Sources */,
 				C8B649772DE16910000051AC /* ShareButton.swift in Sources */,
 				C8B649792DE16C72000051AC /* ActivityView.swift in Sources */,
+				C88F30EF2E558B23000BF522 /* AppReviewManager.swift in Sources */,
 				C8B6496D2DDFEF0D000051AC /* RecipeResponse.swift in Sources */,
 				C8B649712DE1556E000051AC /* HeaderView.swift in Sources */,
 				C88F0EE127EDACFF00A72436 /* SmallAddButton.swift in Sources */,
@@ -503,7 +511,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping List/Preview Content\"";
 				DEVELOPMENT_TEAM = CRH4BNJVR7;
 				ENABLE_PREVIEWS = YES;
@@ -520,7 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.5;
+				MARKETING_VERSION = 5;
 				PRODUCT_BUNDLE_IDENTIFIER = "random.Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -540,7 +548,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping List/Preview Content\"";
 				DEVELOPMENT_TEAM = CRH4BNJVR7;
 				ENABLE_PREVIEWS = YES;
@@ -557,7 +565,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.5;
+				MARKETING_VERSION = 5;
 				PRODUCT_BUNDLE_IDENTIFIER = "random.Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -696,6 +704,14 @@
 				minimumVersion = 10.10.0;
 			};
 		};
+		C88F2F762E4EB501000BF522 /* XCRemoteSwiftPackageReference "couchbase-lite-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/couchbase/couchbase-lite-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -708,6 +724,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C88F0EE427EDADFA00A72436 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		C88F2F772E4EB501000BF522 /* CouchbaseLiteSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C88F2F762E4EB501000BF522 /* XCRemoteSwiftPackageReference "couchbase-lite-ios" */;
+			productName = CouchbaseLiteSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
