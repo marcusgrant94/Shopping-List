@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C83F08102E6B796E00927C41 /* EditingTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83F080F2E6B796400927C41 /* EditingTaskSheet.swift */; };
+		C83F08252E6CF32E00927C41 /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83F08242E6CF32500927C41 /* WhatsNewView.swift */; };
 		C86099AD2DF22922009E86E3 /* PreimumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86099AC2DF22917009E86E3 /* PreimumButton.swift */; };
 		C88F0EB127EDABBE00A72436 /* Shopping_ListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F0EB027EDABBE00A72436 /* Shopping_ListApp.swift */; };
 		C88F0EB327EDABBE00A72436 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F0EB227EDABBE00A72436 /* ContentView.swift */; };
@@ -53,7 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C83F080F2E6B796400927C41 /* EditingTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingTaskSheet.swift; sourceTree = "<group>"; };
+		C83F08242E6CF32500927C41 /* WhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
 		C86099AC2DF22917009E86E3 /* PreimumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreimumButton.swift; sourceTree = "<group>"; };
+		C86D7C6E2E571A3400050BAF /* Shopping-List-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Shopping-List-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C88F0EAD27EDABBE00A72436 /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88F0EB027EDABBE00A72436 /* Shopping_ListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping_ListApp.swift; sourceTree = "<group>"; };
 		C88F0EB227EDABBE00A72436 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 		C88F0EAF27EDABBE00A72436 /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				C86D7C6E2E571A3400050BAF /* Shopping-List-Info.plist */,
 				C88F0EB027EDABBE00A72436 /* Shopping_ListApp.swift */,
 				C88F0EB427EDABC000A72436 /* Assets.xcassets */,
 				C88F0EDF27EDACDD00A72436 /* Components */,
@@ -175,6 +181,8 @@
 		C88F0EDA27EDAC2500A72436 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C83F08242E6CF32500927C41 /* WhatsNewView.swift */,
+				C83F080F2E6B796400927C41 /* EditingTaskSheet.swift */,
 				C8B649782DE16C66000051AC /* ActivityView.swift */,
 				C8B649742DE15CF8000051AC /* PaywallView.swift */,
 				C8B649722DE15640000051AC /* TaskListSection.swift */,
@@ -337,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8B649752DE15CFF000051AC /* PaywallView.swift in Sources */,
+				C83F08252E6CF32E00927C41 /* WhatsNewView.swift in Sources */,
 				C88F0EEC27EDAE8500A72436 /* Task.swift in Sources */,
 				C88F0EB327EDABBE00A72436 /* ContentView.swift in Sources */,
 				C88F0EDC27EDAC5E00A72436 /* TasksView.swift in Sources */,
@@ -346,6 +355,7 @@
 				C8B6496B2DDD7132000051AC /* SuggestionsManager.swift in Sources */,
 				C88F0EE327EDAD4F00A72436 /* TaskRow.swift in Sources */,
 				C8B649772DE16910000051AC /* ShareButton.swift in Sources */,
+				C83F08102E6B796E00927C41 /* EditingTaskSheet.swift in Sources */,
 				C8B649792DE16C72000051AC /* ActivityView.swift in Sources */,
 				C88F30EF2E558B23000BF522 /* AppReviewManager.swift in Sources */,
 				C8B6496D2DDFEF0D000051AC /* RecipeResponse.swift in Sources */,
@@ -511,13 +521,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 6.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping List/Preview Content\"";
 				DEVELOPMENT_TEAM = CRH4BNJVR7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Shopping-List-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Shopping List: Simple List";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -528,7 +540,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5;
+				MARKETING_VERSION = 5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "random.Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -548,13 +560,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 6.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping List/Preview Content\"";
 				DEVELOPMENT_TEAM = CRH4BNJVR7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Shopping-List-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Shopping List: Simple List";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -565,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5;
+				MARKETING_VERSION = 5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "random.Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

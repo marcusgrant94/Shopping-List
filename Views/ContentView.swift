@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+extension Bundle {
+    var appVersion: String {
+        infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+    }
+}
+
 struct ContentView: View {
     @StateObject var realmManager = RealmManager()
     @StateObject var suggestionManager = SuggestionManager()
     @State private var showAddTaskView = false
     @Environment(\.colorScheme) private var colorScheme
+    @AppStorage("lastSeenWhatsNewVersion") private var lastSeenVersion = ""
+    @State private var showWhatsNew = false
+
 
     private var pageBackground: Color {
         if colorScheme == .dark {
@@ -26,6 +35,13 @@ struct ContentView: View {
             pageBackground.ignoresSafeArea()
             Color(hue: 0.086, saturation: 0.141, brightness: 0.972)
             TasksView()
+                .onAppear {
+                    let current = Bundle.main.appVersion
+                    if lastSeenVersion != current {
+                        showWhatsNew = true
+                        lastSeenVersion = current
+                    }
+                }
                 .environmentObject(realmManager)
             
             SmallAddButton()
@@ -37,6 +53,9 @@ struct ContentView: View {
         .sheet(isPresented: $showAddTaskView) {
             AddTaskView()
                 .environmentObject(realmManager)
+        }
+        .sheet(isPresented: $showWhatsNew) {
+            WhatsNewView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }

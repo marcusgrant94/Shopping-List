@@ -85,6 +85,28 @@ final class RealmManager: ObservableObject {
                 if let title { task.title = title }
                 if let quantity { task.quantity = quantity }
                 if let completed { task.completed = completed }
+                
+            }
+            getTasks()
+        } catch {
+            assertionFailure("Error updating task \(id): \(error)")
+        }
+    }
+    
+    func updateTaskName(id: ObjectId,
+                    title: String? = nil,
+                    quantity: Int? = nil,
+                    completed: Bool? = nil,
+                        newTask: String) {
+        let cleaned = newTask.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let localRealm,
+              let task = localRealm.object(ofType: ShoppingTask.self, forPrimaryKey: id) else { return }
+        do {
+            try localRealm.write {
+                if let title { task.title = title }
+                if let quantity { task.quantity = quantity }
+                if let completed { task.completed = completed }
+                task.title = cleaned
             }
             getTasks()
         } catch {

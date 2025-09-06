@@ -7,6 +7,8 @@
 
 import SwiftUI
 import RealmSwift
+import UIKit
+
 
 enum Theme: Int, CaseIterable, Identifiable {
     case system = 0, light, dark
@@ -21,6 +23,15 @@ enum Theme: Int, CaseIterable, Identifiable {
         }
     }
 }
+enum Haptics {
+    static func success() { UINotificationFeedbackGenerator().notificationOccurred(.success) }
+    static func warning() { UINotificationFeedbackGenerator().notificationOccurred(.warning) }
+    static func error()   { UINotificationFeedbackGenerator().notificationOccurred(.error) }
+    static func tap(_ style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+        UIImpactFeedbackGenerator(style: style).impactOccurred()
+    }
+}
+
 
 
 @main

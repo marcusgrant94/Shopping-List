@@ -11,6 +11,7 @@ struct TaskListSection: View {
     @EnvironmentObject var RealmManager: RealmManager
     @EnvironmentObject var SuggestionManager: SuggestionManager
     var suggestionManager: SuggestionManager
+    @State var isEditing: ShoppingTask?
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -20,14 +21,22 @@ struct TaskListSection: View {
                     if !task.isInvalidated {
                         TaskRow(task: task.title, quantity: task.quantity, completed: task.completed)
                             .onTapGesture {
+                                UINotificationFeedbackGenerator().notificationOccurred(.success) 
                                 RealmManager.updateTask(id: task.id, completed: !task.completed)
                             }
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
+                                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                                     RealmManager.deleteTask(id: task.id)
                                     
                                 } label: {
                                     Label("Delete", systemImage: "trash")
+                                }
+                                
+                                Button {
+                                    isEditing = task
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
                                 }
                             }
                     }
@@ -37,6 +46,9 @@ struct TaskListSection: View {
             }
             .onAppear {
                 print("Suggestions: \(suggestionManager.suggestions.map { $0.title })")
+            }
+            .sheet(item: $isEditing) { task in
+                EditingTaskSheet(realmManager: RealmManager, task: task)
             }
 
             .scrollContentBackground(.hidden)

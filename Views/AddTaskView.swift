@@ -17,6 +17,7 @@ struct AddTaskView: View {
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var showPaywall = false
+    @FocusState private var nameFieldFocused: Bool
 
     let freeTaskLimit = 6
     @AppStorage("isPremiumUser") private var isPremiumUser = false
@@ -25,7 +26,7 @@ struct AddTaskView: View {
     private var pageBackground: Color {
         colorScheme == .dark
         ? Color(.systemGroupedBackground)
-        : Color(hue: 0.086, saturation: 0.141, brightness: 0.972) // your original
+        : Color(hue: 0.086, saturation: 0.141, brightness: 0.972)
     }
 
     @Environment(\.dismiss) var dismiss
@@ -45,8 +46,11 @@ struct AddTaskView: View {
                 text: $title,
                 prompt: Text("Enter your item here")
                     .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .secondary)
+                
             )
+            .focused($nameFieldFocused)
             .textFieldStyle(.roundedBorder)
+            .submitLabel(.done)
 
             // Quantity field with white placeholder in dark mode
             TextField(
@@ -74,6 +78,7 @@ struct AddTaskView: View {
                         suggestionManager: suggestionManager
                     )
                     dismiss()
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }
             } label: {
                 Text("Add item")
@@ -111,6 +116,7 @@ struct AddTaskView: View {
             Button("Import Ingredients") {
                 if isPremiumUser {
                     Task {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         await importRecipeIngredients(from: recipeURL)
                         if errorMessage == nil { dismiss() }
                     }
@@ -146,6 +152,9 @@ struct AddTaskView: View {
         .padding(.horizontal)
         .background(pageBackground)
         .sheet(isPresented: $showPaywall) { PaywallView() }
+        .onAppear {
+            DispatchQueue.main.async { nameFieldFocused = true }
+        }
     }
 
     // MARK: - Networking
